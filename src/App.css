@@ -1,0 +1,22 @@
+:root {
+  --padding-all: 1rem;
+}
+
+.app {
+  display: flex;
+}
+
+.menu {
+  height: calc(92.3vh - var(--padding-all));
+}
+
+.homepage-container {
+  height: calc(92.3vh - var(--padding-all));
+}
+
+.logo-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: var(--padding-all);
+}

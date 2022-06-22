@@ -13,13 +13,14 @@ import icon from '../images/logo.png';
 const Navbar = () => {
   return (
     <div className='navbar-container'>
-      <div className='logo-container'>
-        <Avatar src={icon} size='large' />
-        <Typography.Title level={2}>
-          <Link to='/'>CryptoNews</Link>
-        </Typography.Title>
-      </div>
-      <Menu theme='dark'>
+      <Menu theme='dark' className='menu'>
+        <div className='logo-container'>
+          <Avatar src={icon} size={64} style={{ color: 'white' }} />
+          <Typography.Title level={2}>
+            <Link to='/'>CryptoNews</Link>
+          </Typography.Title>
+        </div>
+
         <Menu.Item icon={<HomeOutlined />} key='1'>
           <Link to='/'>Home</Link>
         </Menu.Item>
