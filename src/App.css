@@ -2,16 +2,26 @@
   --padding-all: 1rem;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .app {
-  display: flex;
+  min-height: calc(100vh - 88px);
+
+  display: grid;
+  grid-template-columns: 300px 1fr;
 }
 
 .menu {
-  height: calc(92.3vh - var(--padding-all));
+  min-height: calc(100vh - 88px);
+  flex-grow: 1;
 }
 
 .homepage-container {
-  height: calc(92.3vh - var(--padding-all));
+  flex-grow: 1;
+  margin: 1rem;
 }
 
 .logo-container {
@@ -19,4 +29,18 @@
   justify-content: flex-start;
   align-items: center;
   padding: var(--padding-all);
+}
+
+.home-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.show-more {
+  margin-top: 0 !important;
+}
+
+.crypto-image {
+  width: 50px;
 }

@@ -1,80 +1,72 @@
 import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment } from '../redux/counterSlice';
+import { Link } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
+
 import { useGetCryptoExchangeQuery } from '../redux/services/cryptoData';
 
 import millify from 'millify';
 import { Typography, Row, Col, Statistic } from 'antd';
 
+import { Cryptocurrencies, News } from '../components';
+
 const { Title } = Typography;
 
 const Homepage = () => {
-  const count = useSelector((state) => state.counter.value);
-  const dispatch = useDispatch();
+  const { data, isFetching } = useGetCryptoExchangeQuery('');
 
-  const { data, isLoading } = useGetCryptoExchangeQuery('');
+  // const {
+  //   markets,
+  //   market_cap_change_percentage_24h_usd: total24hvolume,
+  //   active_cryptocurrencies,
+  // } = data?.data;
 
   console.log(data);
-
-  const {
-    markets,
-    market_cap_change_percentage_24h_usd: total24hvolume,
-    active_cryptocurrencies,
-  } = data?.data;
-
-  const { total_volume } = data?.data;
-
-  const totalMarketCap = Object.values(total_volume).reduce((acc, val) => {
-    return acc + val;
-  }, 0);
-
-  console.log(millify(totalMarketCap));
-
-  // 48629300526269496
-  // 9007199254740991
+  if (isFetching) return 'Loading ...';
 
   return (
-    <div className='homepage-container'>
-      <Title level={2}>Global Crypto Statistic</Title>
-      <Row>
-        <Col span={12}>
-          <Statistic
-            title='Total Cryptocurrency'
-            value={active_cryptocurrencies}
-          />
-        </Col>
-        <Col span={12}>
-          <Statistic title='Total Exchanges' value={5} />
-        </Col>
-        <Col span={12}>
-          <Statistic title='Total Market Cap' value={5} />
-        </Col>
-        <Col span={12}>
-          <Statistic title='Total 24h Volume' value={millify(total24hvolume)} />
-        </Col>
-        <Col span={12}>
-          <Statistic title='Total Markets' value={markets} />
-        </Col>
-      </Row>
-      <div>
-        <div>
-          <button
-            aria-label='Increment value'
-            onClick={() => dispatch(increment())}
-          >
-            Increment
-          </button>
-          <span>{count}</span>
-          <button
-            aria-label='Decrement value'
-            onClick={() => dispatch(decrement())}
-          >
-            Decrement
-          </button>
+    <>
+      <div className='homepage-container'>
+        <Title level={2}>Global Crypto Statistic</Title>
+        <Row>
+          <Col span={12}>
+            <Statistic
+              title='Total Cryptocurrency'
+              value={data.data.active_cryptocurrencies}
+            />
+          </Col>
+
+          <Col span={12}>
+            <Statistic
+              title='Total 24h Volume'
+              value={millify(data.data.market_cap_change_percentage_24h_usd)}
+            />
+          </Col>
+          <Col span={12}>
+            <Statistic title='Total Markets' value={data.data.markets} />
+          </Col>
+        </Row>
+        <div className='home-heading-container'>
+          <Title level={2} className='home-title'>
+            Top 10 Cryptocurrencies in the world
+          </Title>
+          <Title level={3} className='show-more'>
+            <Link to='/cryptocurrencies'>Show More</Link>
+          </Title>
         </div>
+        <Cryptocurrencies simplified />
+        <div className='home-heading-container'>
+          <Title level={2} className='home-title'>
+            Latest Crypto News
+          </Title>
+          <Title level={3} className='show-more'>
+            <Link to='/news'>Show More</Link>
+          </Title>
+        </div>
+        <News simplified />
       </div>
-    </div>
+    </>
   );
 };
 
