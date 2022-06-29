@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGetCoinsQuery } from '../redux/services/coinsData';
 
 import { Row, Col, Card, Input } from 'antd';
@@ -8,12 +8,26 @@ import millify from 'millify';
 const Cryptocurrencies = () => {
   const { data: cryptoList, isFetching } = useGetCoinsQuery('');
   const [cryptos, setCryptos] = useState(cryptoList?.data?.coins);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const filteredData = cryptoList?.data?.coins.filter((coin) =>
+      coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setCryptos(filteredData);
+  }, [cryptoList, searchTerm]);
 
   if (isFetching) return 'Loading ...';
 
   console.log(cryptos);
   return (
-    <>
+    <div className='cryptocurrencies-container'>
+      <div className='search-crypto'>
+        <Input
+          placeholder='Search Cryptocurrency'
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <Row gutter={[32, 32]}>
         {cryptos.map((currency) => {
           return (
@@ -39,7 +53,7 @@ const Cryptocurrencies = () => {
           );
         })}
       </Row>
-    </>
+    </div>
   );
 };
 

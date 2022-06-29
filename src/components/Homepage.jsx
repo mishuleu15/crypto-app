@@ -16,13 +16,6 @@ const { Title } = Typography;
 const Homepage = () => {
   const { data, isFetching } = useGetCryptoExchangeQuery('');
 
-  // const {
-  //   markets,
-  //   market_cap_change_percentage_24h_usd: total24hvolume,
-  //   active_cryptocurrencies,
-  // } = data?.data;
-
-  console.log(data);
   if (isFetching) return 'Loading ...';
 
   return (

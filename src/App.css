@@ -13,10 +13,9 @@ body {
   display: grid;
   grid-template-columns: 300px 1fr;
 }
-
-.menu {
-  min-height: calc(100vh - 88px);
-  flex-grow: 1;
+.navbar {
+  min-height: calc(100vh);
+  background-color: #001529;
 }
 
 .homepage-container {
@@ -37,10 +36,19 @@ body {
   align-items: center;
 }
 
+.cryptocurrencies-container {
+  margin: 2rem 1rem;
+}
+
 .show-more {
   margin-top: 0 !important;
 }
 
 .crypto-image {
-  width: 50px;
+  width: 40px;
+}
+
+.search-crypto {
+  width: 40%;
+  margin: 1rem auto;
 }
