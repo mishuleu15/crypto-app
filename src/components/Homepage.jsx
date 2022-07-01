@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
-
 import { useGetCryptoExchangeQuery } from '../redux/services/cryptoData';
 
 import millify from 'millify';
@@ -48,7 +46,7 @@ const Homepage = () => {
             <Link to='/cryptocurrencies'>Show More</Link>
           </Title>
         </div>
-        <Cryptocurrencies simplified />
+        <Cryptocurrencies />
         <div className='home-heading-container'>
           <Title level={2} className='home-title'>
             Latest Crypto News
