@@ -52,3 +52,61 @@ body {
   width: 40%;
   margin: 1rem auto;
 }
+
+.news-section-container {
+  padding: 1rem;
+  padding-right: 1rem;
+}
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 10rem;
+}
+.coin-detail-container {
+  padding: 2rem;
+}
+
+.coin-stats {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(209, 207, 207);
+  margin-bottom: 1rem;
+}
+
+.coin-stats .anticon {
+  margin-right: 1rem;
+}
+
+.coin-stats-name {
+  display: flex;
+}
+
+.stats {
+  font-weight: 700;
+}
+.select-timeperiod {
+  width: 10rem;
+}
+
+.coin-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 0 10rem;
+}
+
+.coin-link {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link-name {
+  margin-right: 2rem;
+}
+@media screen and (max-width: 1166px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+}

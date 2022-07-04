@@ -12,13 +12,11 @@ const Cryptocurrencies = () => {
 
   const location = useLocation();
 
-  console.log(location);
-
   useEffect(() => {
     if (location.pathname === '/') {
-      setCryptos(cryptoList?.data?.coins.slice(0, 10));
+      setCryptos(cryptoList?.data?.coins?.slice(0, 10));
     } else {
-      const filteredData = cryptoList?.data?.coins.filter((coin) =>
+      const filteredData = cryptoList?.data?.coins?.filter((coin) =>
         coin.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setCryptos(filteredData);
@@ -55,7 +53,7 @@ const Cryptocurrencies = () => {
                     hoverable
                   >
                     <p>Price: {millify(currency.price)}</p>
-                    <p>Markets: {millify(currency.numberOfMarkets)}</p>
+                    <p>Markets: {millify(currency.marketCap)}</p>
                     {/* <p>Daily Change: {millify(currency.change)}</p> */}
                   </Card>
                 </Link>
