@@ -105,8 +105,43 @@ body {
 .link-name {
   margin-right: 2rem;
 }
+
+.chart-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.chart-title {
+  color: #0071bd !important;
+  margin: 0 !important;
+}
+
+.price-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-change,
+.current-price {
+  margin: 0 1rem 0 0 !important;
+  font-weight: 700 !important;
+}
+
+.menu-control-container {
+  display: none !important;
+}
+
 @media screen and (max-width: 1166px) {
   .stats-container {
     grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .menu-control-container {
+    display: block !important;
+    margin-left: 1rem;
   }
 }
