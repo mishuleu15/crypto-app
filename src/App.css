@@ -14,7 +14,7 @@ body {
   grid-template-columns: 300px 1fr;
 }
 .navbar {
-  min-height: calc(100vh);
+  min-height: 32vh;
   background-color: #001529;
 }
 
@@ -150,6 +150,26 @@ body {
   left: 200px;
 }
 
+.exchange-image {
+  margin: 0px 10px !important;
+}
+
+.ant-collapse-header {
+  display: block !important;
+}
+
+.exchange-container {
+  padding: 1rem !important;
+}
+
+.exchange-header {
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0071bd;
+}
+
 @media screen and (max-width: 1166px) {
   .stats-container {
     grid-template-columns: 1fr;
@@ -160,5 +180,13 @@ body {
   .menu-control-container {
     display: block !important;
     margin-left: 1rem;
+  }
+
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .logo-container {
+    justify-content: space-between;
   }
 }

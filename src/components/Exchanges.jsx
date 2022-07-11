@@ -1,80 +1,65 @@
-import React from 'react';
-import { Collapse, Typography, Image } from 'antd';
+import millify from 'millify';
+import { Collapse, Row, Col, Typography, Avatar } from 'antd';
+import HTMLReactParser from 'html-react-parser';
 
 import { useGetCoinExchangesQuery } from '../redux/services/cryptoData';
 
 const { Panel } = Collapse;
-const { Title, Text } = Typography;
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
+const { Text } = Typography;
 
 const Exchanges = () => {
   const { data } = useGetCoinExchangesQuery([]);
-  const onChange = (key) => {
-    console.log(key);
-  };
 
-  console.log({ data });
+  const description =
+    'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, vero assumenda temporibus magnam eveniet reiciendis rerum amet culpa alias! Atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. In, molestiae beatae saepe itaque ipsum nisi autem deleniti maiores quod? Voluptas voluptates voluptatem officia consectetur iure quis incidunt vitae ipsa porro!';
 
   if (data === undefined) {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <div>
-        {data.map((coin, index) => (
+      <div className='exchange-container'>
+        <Row className='exchange-header'>
+          <Col span={6}>Exchanges</Col>
+          <Col span={6}>24h Trade Volume</Col>
+          <Col span={6}>Markets</Col>
+          <Col span={6}>Change</Col>
+        </Row>
+        {data.map((exchange, index) => (
           <>
-            <Image
-              width={20}
-              src={`${coin.image}`}
-              className='img'
-              preview={false}
-            />
-            <Collapse
-              defaultActiveKey={[`${coin.id}`]}
-              onChange={onChange}
-              className='collapse'
-            >
-              <Panel
-                header={`${index}. ${coin.name}`}
-                key={`${coin.id}`}
-                showArrow={false}
-                className='panel'
-              >
-                <p>{coin.country}</p>
-              </Panel>
-            </Collapse>
+            <Col span={24}>
+              <Collapse>
+                <Panel
+                  key={exchange.id}
+                  showArrow={false}
+                  header={
+                    <Row key={exchange.id}>
+                      <Col span={6}>
+                        <Text>
+                          <strong className='score-rank'>
+                            {exchange.trust_score_rank}.
+                          </strong>
+                        </Text>
+                        <Avatar
+                          className='exchange-image'
+                          src={exchange.image}
+                        />
+                        <Text>
+                          <strong>{exchange.name}</strong>
+                        </Text>
+                      </Col>
+                      <Col span={6}>
+                        ${millify(exchange.trade_volume_24h_btc)}
+                      </Col>
+                    </Row>
+                  }
+                >
+                  {HTMLReactParser(description || '')}
+                </Panel>
+              </Collapse>
+            </Col>
           </>
         ))}
       </div>
-      // <Collapse defaultActiveKey={`${data.id}`} onChange={onChange}>
-      //   {data.map((coin, index) => {
-      //     return (
-      //       <Panel
-      //         header={`${index}${'.'} ${coin.name}`}
-      //         key={`${coin.id}`}
-      //         showArrow={false}
-      //       >
-      //         <Text>{coin.name}</Text>
-      //       </Panel>
-      //     );
-      //   })}
-
-      // <Collapse defaultActiveKey={`${data.id}`} onChange={onChange}>
-      //   {data.map((coin, index) => {
-      //     return (
-      //       <Panel
-      //         header={`${index}${'.'} ${coin.name}`}
-      //         key={`${coin.id}`}
-      //         showArrow={false}
-      //       >
-      //         <Text>{coin.name}</Text>
-      //       </Panel>
-      //     );
-      //   })}
-      // </Collapse>
     );
   }
 };
